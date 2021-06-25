@@ -35,7 +35,10 @@
 
 ## About The Project
 
-Clean Architecture Solution Template for ASP.NET Core 5.0. Built with Onion/Hexagonal Architecture and incorporates the most essential Packages your projects will ever need. Includes both WebApi and Web(MVC) Projects.
+Clean Architecture Solution Template for ASP.NET Core 5.0. Built for exercise of checkout system for a shop which sell only apples and oranges. Build a system which take list of items as string input
+Then apply discount offers like 
+1) buy one , get one free
+2) 3 for price of 2
 
 ### Built with
 
@@ -45,8 +48,7 @@ Clean Architecture Solution Template for ASP.NET Core 5.0. Built with Onion/Hexa
 
 ## Getting Started
 
-An idea to bring together the best and essential practices / packages of ASP.NET Core 5.0 along with Clean Hexagonal Architecture that can be a right fit for small/mid and enterprise level solutions.
-How easy would it be if you are able to run a single line of CLI command on your Console and you get a complete implementation in no time? That's the exact vision I have while building this full-fledged Boilerplate template.
+An idea to bring together the best and essential practices / packages of ASP.NET Core 5.0 along best solution for product checkout
 
 ### Prerequisites
 
