@@ -12,7 +12,13 @@ namespace CheckoutSys.Application.Features.Products.Commands.Update
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Rate { get; set; }
-        public int BrandId { get; set; }
+        public int ProductCategoryId { get; set; }
+        public int StockQuantity { get; set; }
+        public int OrderMinimumQuantity { get; set; }
+        public int OrderMaximumQuantity { get; set; }
+        public bool NotReturnable { get; set; }
+        public bool IsPublished { get; set; }
+        public bool IsDeleted { get; set; }
 
         public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Result<int>>
         {
@@ -38,7 +44,13 @@ namespace CheckoutSys.Application.Features.Products.Commands.Update
                     product.Name = command.Name ?? product.Name;
                     product.Rate = (command.Rate == 0) ? product.Rate : command.Rate;
                     product.Description = command.Description ?? product.Description;
-                    product.BrandId = (command.BrandId == 0) ? product.BrandId : command.BrandId;
+                    product.ProductCategoryId = command.ProductCategoryId;
+                    product.IsDeleted = command.IsDeleted;
+                    product.IsPublished = command.IsPublished;
+                    product.NotReturnable = command.NotReturnable;
+                    product.OrderMaximumQuantity = command.OrderMaximumQuantity;
+                    product.OrderMinimumQuantity = command.OrderMinimumQuantity;
+                    product.StockQuantity = command.StockQuantity;
                     await _productRepository.UpdateAsync(product);
                     await _unitOfWork.Commit(cancellationToken);
                     return Result<int>.Success(product.Id);

@@ -38,6 +38,11 @@ namespace CheckoutSys.Infrastructure.Repositories
             return await _repository.Entities.ToListAsync();
         }
 
+        public async Task<List<Product>> GetListAsync(List<string> productnames)
+        {
+            return await _repository.Entities.Where(a => productnames.Any(x => x == a.Name)).ToListAsync();
+        }
+
         public async Task<int> InsertAsync(Product product)
         {
             await _repository.AddAsync(product);

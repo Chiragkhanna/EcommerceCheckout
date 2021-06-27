@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System;
 
 namespace CheckoutSys.Infrastructure.DbContexts
 {
@@ -23,6 +24,7 @@ namespace CheckoutSys.Infrastructure.DbContexts
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
 
         public IDbConnection Connection => Database.GetDbConnection();
 
@@ -63,7 +65,21 @@ namespace CheckoutSys.Infrastructure.DbContexts
             {
                 property.SetColumnType("decimal(18,2)");
             }
+            
             base.OnModelCreating(builder);
+            builder.Seed();
+        }
+
+    }
+    public static class ModelBuilderExtensions
+    {
+        public static void Seed(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory { Id = 1, Name = "Fruits", ParentCategoryId = 0 });
+            modelBuilder.Entity<Product>().HasData(
+                new Product { Id = 1, Description = "Apple", Name = "Apple", Barcode = "barcode", CreatedBy = "ck", CreatedOn = DateTime.UtcNow,IsDeleted = false, IsPublished = true, NotReturnable = true, OrderMaximumQuantity = 200, OrderMinimumQuantity = 0, Rate = 0.6m, StockQuantity = 200},
+                new Product { Id = 2, Description = "Orange", Name = "Orange", Barcode = "barcode", CreatedBy = "ck", CreatedOn = DateTime.UtcNow,IsDeleted = false, IsPublished = true, NotReturnable = true, OrderMaximumQuantity = 200, OrderMinimumQuantity = 0, Rate = 0.25m, StockQuantity = 200}
+            );
         }
     }
 }

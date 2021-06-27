@@ -10,6 +10,7 @@ namespace CheckoutSys.Application.Interfaces.Repositories
         IQueryable<Product> Products { get; }
 
         Task<List<Product>> GetListAsync();
+        Task<List<Product>> GetListAsync(List<string> productnames);
 
         Task<Product> GetByIdAsync(int productId);
 

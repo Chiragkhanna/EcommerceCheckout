@@ -1,6 +1,6 @@
 ﻿using CheckoutSys.API.Controllers;
+using CheckoutSys.Application.Features.Orders.Queries.GetCartItemsTotal;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CheckoutSys.Api.Controllers.v1
@@ -10,9 +10,9 @@ namespace CheckoutSys.Api.Controllers.v1
 
         // POST api/<controller>
         [HttpPost]
-        public async Task<IActionResult> Post(List<string> productNames)
+        public async Task<IActionResult> Post(GetCartItemsTotalQuery command)
         {
-            return Ok();
+            return Ok(await _mediator.Send(command));
         }
 
     }

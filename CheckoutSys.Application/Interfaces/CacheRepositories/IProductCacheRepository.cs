@@ -8,6 +8,6 @@ namespace CheckoutSys.Application.Interfaces.CacheRepositories
     {
         Task<List<Product>> GetCachedListAsync();
 
-        Task<Product> GetByIdAsync(int brandId);
+        Task<Product> GetByIdAsync(int productId);
     }
 }
