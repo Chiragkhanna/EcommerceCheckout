@@ -4,14 +4,16 @@ using CheckoutSys.Infrastructure.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CheckoutSys.Infrastructure.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210628105243_AddDiscount")]
+    partial class AddDiscount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,7 +122,7 @@ namespace CheckoutSys.Infrastructure.Migrations.ApplicationDb
                             Id = 1,
                             Barcode = "barcode",
                             CreatedBy = "ck",
-                            CreatedOn = new DateTime(2021, 6, 28, 14, 33, 52, 343, DateTimeKind.Utc).AddTicks(9799),
+                            CreatedOn = new DateTime(2021, 6, 28, 10, 52, 29, 596, DateTimeKind.Utc).AddTicks(6484),
                             Description = "Apple",
                             IsDeleted = false,
                             IsPublished = true,
@@ -137,7 +139,7 @@ namespace CheckoutSys.Infrastructure.Migrations.ApplicationDb
                             Id = 2,
                             Barcode = "barcode",
                             CreatedBy = "ck",
-                            CreatedOn = new DateTime(2021, 6, 28, 14, 33, 52, 344, DateTimeKind.Utc).AddTicks(8142),
+                            CreatedOn = new DateTime(2021, 6, 28, 10, 52, 29, 600, DateTimeKind.Utc).AddTicks(1403),
                             Description = "Orange",
                             IsDeleted = false,
                             IsPublished = true,
@@ -269,56 +271,6 @@ namespace CheckoutSys.Infrastructure.Migrations.ApplicationDb
                     b.HasKey("Id");
 
                     b.ToTable("Discounts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BundleSelectionOperation = "MultipleOf",
-                            BundleSelectionProductId = 1,
-                            BundleSelectionQuantity = 2,
-                            CreatedBy = "ck",
-                            CreatedOn = new DateTime(2021, 6, 28, 14, 33, 52, 345, DateTimeKind.Utc).AddTicks(2163),
-                            DiscountAmount = 0m,
-                            DiscountLimitation = 0,
-                            DiscountLimitationId = 0,
-                            DiscountPercentage = 100m,
-                            DiscountType = 2,
-                            DiscountTypeId = 2,
-                            EndDateUtc = new DateTime(2021, 7, 28, 14, 33, 52, 346, DateTimeKind.Utc).AddTicks(1328),
-                            EntityId = 1,
-                            IsCumulative = true,
-                            IsProductBundleEnabled = true,
-                            LimitationTimes = 0,
-                            MaximumDiscountAmount = 10000m,
-                            Name = "buy 1 get 1 free",
-                            StartDateUtc = new DateTime(2021, 6, 28, 14, 33, 52, 345, DateTimeKind.Utc).AddTicks(9062),
-                            UsePercentage = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BundleSelectionOperation = "MultipleOf",
-                            BundleSelectionProductId = 2,
-                            BundleSelectionQuantity = 3,
-                            CreatedBy = "ck",
-                            CreatedOn = new DateTime(2021, 6, 28, 14, 33, 52, 347, DateTimeKind.Utc).AddTicks(2479),
-                            DiscountAmount = 0m,
-                            DiscountLimitation = 0,
-                            DiscountLimitationId = 0,
-                            DiscountPercentage = 100m,
-                            DiscountType = 2,
-                            DiscountTypeId = 2,
-                            EndDateUtc = new DateTime(2021, 7, 28, 14, 33, 52, 347, DateTimeKind.Utc).AddTicks(2505),
-                            EntityId = 2,
-                            IsCumulative = true,
-                            IsProductBundleEnabled = true,
-                            LimitationTimes = 0,
-                            MaximumDiscountAmount = 10000m,
-                            Name = "3 for the price of 2 on Oranges",
-                            StartDateUtc = new DateTime(2021, 6, 28, 14, 33, 52, 347, DateTimeKind.Utc).AddTicks(2504),
-                            UsePercentage = true
-                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -18,12 +18,14 @@ namespace CheckoutSys.Application.Features.Orders.Queries.GetCartItemsTotal
         public class GetCartItemsTotalQueryHandler : IRequestHandler<GetCartItemsTotalQuery, Result<GetCartItemsTotalResponse>>
         {
             private readonly IProductRepository _product;
+            private readonly IDiscountRepository _discount;
             private readonly IMapper _mapper;
 
-            public GetCartItemsTotalQueryHandler(IProductRepository product, IMapper mapper)
+            public GetCartItemsTotalQueryHandler(IProductRepository product, IDiscountRepository discount, IMapper mapper)
             {
                 _product = product;
                 _mapper = mapper;
+                _discount = discount;
             }
 
             public async Task<Result<GetCartItemsTotalResponse>> Handle(GetCartItemsTotalQuery query, CancellationToken cancellationToken)
@@ -73,10 +75,16 @@ namespace CheckoutSys.Application.Features.Orders.Queries.GetCartItemsTotal
                     var productPrice = cartItem.Product.Rate;
                     decimal taxPercent = 0;
                     productPrice = productPrice / (1 + (taxPercent / 100));
+                    if (query.ApplyDiscount)
+                    {
+                        var discountedItem = await _discount.GetDiscountAmount(cartItem.Product, cartItem.Quantity);
+                        response.OrderDiscount = response.OrderDiscount + discountedItem;
+                    }                    
 
                     response.OrderTotal = response.OrderTotal + productPrice*cartItem.Quantity;
          
                 }
+                response.OrderTotal = response.OrderTotal - response.OrderDiscount;
                 // send the cart items total
                 return Result<GetCartItemsTotalResponse>.Success(response);
             }

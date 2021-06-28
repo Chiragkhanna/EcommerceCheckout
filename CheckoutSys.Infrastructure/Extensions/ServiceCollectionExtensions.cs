@@ -27,7 +27,9 @@ namespace CheckoutSys.Infrastructure.Extensions
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IProductCacheRepository, ProductCacheRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
-            services.AddTransient<IBrandCacheRepository, BrandCacheRepository>();
+            services.AddTransient<IBrandCacheRepository, BrandCacheRepository>(); 
+            services.AddTransient<IDiscountRepository, DiscountRepository>();
+            services.AddTransient<IDiscountCacheRepository, DiscountCacheRepository>();
             services.AddTransient<ILogRepository, LogRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 

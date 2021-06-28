@@ -61,7 +61,50 @@ An idea to bring together the best and essential practices / packages of ASP.NET
     ```.NET Core CLI
     dotnet tool install --global dotnet-ef
     ```
+## Steps to Run
 
+1) Database readiness
+The database migration has already been created, all is require is to update database connection in appsetting and
+in Package Manager Console run following commands
+
+```
+update-database -context ApplicationDbContext
+update-database -context IdentityContext
+```
+
+After this you can verify the in your database the tables like Product, Discount would get created with data in them.
+
+2) Code readiness
+Mark the CheckoutSys.Api as startup project and run it
+It will open the swagger page where multiple API endpoints available like add/delete/update for product and discount plus the checkout api to get the order total
+Use version = 1 in all endpoints
+In checkout API put below as the body
+```
+{
+  "products": [
+    "Apple","Apple","Orange","Apple"
+  ],
+  "applyDiscount": true
+}
+```
+Pass property applyDiscount:true when you want to apply discount else false
+
+We have prices apple at 60 paise and orange at 25 paise and 2 discount already created 
+o  buy one, get one free on Apples
+o 3 for the price of 2 on Oranges
+
+Output 
+```
+{
+  "data": {
+    "orderTotal": 1.45,
+    "orderDiscount": 0.6
+  },
+  "failed": false,
+  "message": null,
+  "succeeded": true
+}
+```
 
 ## Contributing
 

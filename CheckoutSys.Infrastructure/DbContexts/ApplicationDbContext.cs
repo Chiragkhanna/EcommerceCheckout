@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System;
+using CheckoutSys.Domain.Entities.Discount;
 
 namespace CheckoutSys.Infrastructure.DbContexts
 {
@@ -25,6 +26,7 @@ namespace CheckoutSys.Infrastructure.DbContexts
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
 
         public IDbConnection Connection => Database.GetDbConnection();
 
@@ -79,6 +81,10 @@ namespace CheckoutSys.Infrastructure.DbContexts
             modelBuilder.Entity<Product>().HasData(
                 new Product { Id = 1, Description = "Apple", Name = "Apple", Barcode = "barcode", CreatedBy = "ck", CreatedOn = DateTime.UtcNow,IsDeleted = false, IsPublished = true, NotReturnable = true, OrderMaximumQuantity = 200, OrderMinimumQuantity = 0, Rate = 0.6m, StockQuantity = 200},
                 new Product { Id = 2, Description = "Orange", Name = "Orange", Barcode = "barcode", CreatedBy = "ck", CreatedOn = DateTime.UtcNow,IsDeleted = false, IsPublished = true, NotReturnable = true, OrderMaximumQuantity = 200, OrderMinimumQuantity = 0, Rate = 0.25m, StockQuantity = 200}
+            );
+            modelBuilder.Entity<Discount>().HasData(
+                new Discount { Id = 1, Name = "buy 1 get 1 free", DiscountTypeId = 2, CreatedBy = "ck", CreatedOn = DateTime.UtcNow, EntityId = 1, UsePercentage = true, DiscountPercentage = 100, DiscountAmount = 0, MaximumDiscountAmount = 10000, StartDateUtc = DateTime.UtcNow, EndDateUtc = DateTime.UtcNow.AddDays(30), DiscountLimitationId = 0, LimitationTimes = 0, IsCumulative = true, IsProductBundleEnabled = true,BundleSelectionProductId = 1, BundleSelectionQuantity = 2, BundleSelectionOperation = "MultipleOf" },
+                new Discount { Id = 2, Name = "3 for the price of 2 on Oranges", DiscountTypeId = 2, CreatedBy = "ck", CreatedOn = DateTime.UtcNow, EntityId = 2, UsePercentage = true, DiscountPercentage = 100, DiscountAmount = 0, MaximumDiscountAmount = 10000, StartDateUtc = DateTime.UtcNow, EndDateUtc = DateTime.UtcNow.AddDays(30), DiscountLimitationId = 0, LimitationTimes = 0, IsCumulative = true, IsProductBundleEnabled = true, BundleSelectionProductId = 2, BundleSelectionQuantity = 3, BundleSelectionOperation = "MultipleOf" }
             );
         }
     }
